@@ -15,16 +15,6 @@ ABCSE:
   ready: '2021-09-01'
   templates:
     0: "[:rabcse, :repo_id, :issue_id, :automatic_base_change_succeeded_event_id]"
-AE:
-  type: AssignedEvent
-  ready: '2021-09-01'
-  templates:
-    0: "[:rae, :repo_id, :issue_id, :assigned_event_id]"
-AMDE:
-  type: AutoMergeDisabledEvent
-  ready: '2021-09-01'
-  templates:
-    0: "[:amde, :repo_id, :issue_id, :id]"
 AMEE:
   type: AutoMergeEnabledEvent
   ready: '2021-09-01'

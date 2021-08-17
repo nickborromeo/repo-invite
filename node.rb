@@ -106,11 +106,11 @@ module Platform
           Platform::Helpers::GlobalId.register_short_name(as, graphql_name)
 
           global_id_field :id
-          @global_id_templates = templates
-          @global_id_expander = block
-          @global_id_ready_date = Date.parse(ready_date) if ready_date
-          @uses_database_id = uses_database_id
-          @allow_nil_for = allow_nil_for
+          # @global_id_templates = templates
+           @global_id_expander = block
+          # @global_id_ready_date = Date.parse(ready_date) if ready_date
+          # @uses_database_id = uses_database_id
+          # @allow_nil_for = allow_nil_for
         end
 
         attr_reader :global_id_templates

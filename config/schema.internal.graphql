@@ -15,6 +15,7 @@ directive @possibleTypes(
 
 """
 Marks an element of a GraphQL schema as currently under development.
+Adding somethinghere
 """
 directive @underDevelopment(
   """
@@ -25,11 +26,13 @@ directive @underDevelopment(
 
 """
 Marks an element of a GraphQL schema as internal.
+Adding somethinghere
 """
 directive @internal on SCALAR | OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | INTERFACE | UNION | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
 
 """
 Defines the catalog service mapping for a given part of the GraphQL schema.
+Adding somethinghere
 """
 directive @serviceMapping(
   """
