@@ -76,22 +76,6 @@ module Platform
               raise InvalidTemplateError, "Invalid template for #{self.graphql_name}: #{t.inspect}, must contain all lower-case Symbols" # rubocop:disable GitHub/UsePlatformErrors
             end
 
-            if t.size < 2
-              raise InvalidTemplateError, "Template must include at least a prefix and one variable name (for #{self.graphql_name}: #{t})"  # rubocop:disable GitHub/UsePlatformErrors
-            end
-
-            if t.any? { |part| part == :prefix }
-              raise InvalidTemplateError, "`prefix:` is reserved for matching the prefix of the template, it's not a valid variable name (in #{self.graphql_name}: #{t.inspect})" # rubocop:disable GitHub/UsePlatformErrors
-            end
-
-            if t.uniq != t
-              raise InvalidTemplateError, "Templates can't have duplicate names (in #{self.graphql_name}: #{t})" # rubocop:disable GitHub/UsePlatformErrors
-            end
-
-            if uses_database_id && t.last != :id && t.last != "#{self.graphql_name.underscore}_id".to_sym
-              raise InvalidTemplateError, "Template's last variable must be named `:id` or `:#{self.graphql_name.underscore}_id` (for #{self.graphql_name}: #{t})" # rubocop:disable GitHub/UsePlatformErrors
-            end
-
             prefixes << t.first
           end
 
