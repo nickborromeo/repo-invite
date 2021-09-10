@@ -15,12 +15,12 @@ module Platform
         # are added to License::IDS_TO_LICENSES they will get the new format (since they aren't in this list, and
         # shouldn't be added here)
         LEGACY_IDS_TO_LICENSES = Set[
-          "no-license", "other", "agpl-3.0", "apache-2.0", "artistic-2.0", "bsd-2-clause", "bsd-3-clause",
-          "cc0-1.0", "epl-1.0", "gpl-2.0", "gpl-3.0", "isc", "lgpl-2.1", "lgpl-3.0", "mit", "mpl-2.0",
-          "unlicense", "osl-3.0", "ofl-1.1", "wtfpl", "ms-pl", "ms-rl", "bsd-3-clause-clear", "afl-3.0",
-          "lppl-1.3c", "eupl-1.1", "cc-by-4.0", "cc-by-sa-4.0", "zlib", "bsl-1.0", "ncsa", "ecl-2.0",
-          "postgresql", "epl-2.0", "upl-1.0", "eupl-1.2", "0bsd", "cecill-2.1", "odbl-1.0", "bsd-4-clause",
-          "vim", "mit-0"]
+            "no-license", "other", "agpl-3.0", "apache-2.0", "artistic-2.0", "bsd-2-clause", "bsd-3-clause",
+            "cc0-1.0", "epl-1.0", "gpl-2.0", "gpl-3.0", "isc", "lgpl-2.1", "lgpl-3.0", "mit", "mpl-2.0",
+            "unlicense", "osl-3.0", "ofl-1.1", "wtfpl", "ms-pl", "ms-rl", "bsd-3-clause-clear", "afl-3.0",
+            "lppl-1.3c", "eupl-1.1", "cc-by-4.0", "cc-by-sa-4.0", "zlib", "bsl-1.0", "ncsa", "ecl-2.0",
+            "postgresql", "epl-2.0", "upl-1.0", "eupl-1.2", "0bsd", "cecill-2.1", "odbl-1.0", "bsd-4-clause",
+            "vim", "mit-0"]
 
         # Main API for Object Types to implement the Node Interface
         #
