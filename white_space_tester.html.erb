@@ -45,30 +45,28 @@
     <div class="position-relative">
       <div class="dropdown-menu dropdown-menu-sw p-0" style="top:6px;width:378px;">
         <div data-target="get-repo.modal">
-          <% if has_access_to_codespaces %>
-            <%# Dropdown menu with tabs (Local and Codespaces) %>
-            <%= render(Primer::TabNavComponent.new(
-              label: "Choose where to access your code",
-              with_panel: true,
-              bg: :tertiary,
-              m: 0,
-              classes: "hx_tabnav-in-dropdown",
-              body_arguments: { display: :flex }
-              )) do |component| %>
-              <% component.tab(
-                panel_id: "local-panel",
-                id: "local-tab",
-                selected: true,
-                flex: 1,
-                data: {
-                  tab: "local",
-                  action: "click:get-repo#localTabSelected focusin:get-repo#localTabSelected"
-                }
-              ) do |t| %>
-                <% t.text { "Local" } %>
-                <% t.panel do %>
-                  <ul class="list-style-none">
-                    <% if pull_request_context %>
+          <%= render(Primer::TabNavComponent.new(
+            label: "Choose where to access your code",
+            with_panel: true,
+            bg: :tertiary,
+            m: 0,
+            classes: "hx_tabnav-in-dropdown",
+            body_arguments: { display: :flex }
+            )) do |component| %>
+            <% component.tab(
+              panel_id: "local-panel",
+              id: "local-tab",
+              selected: true,
+              flex: 1,
+              data: {
+                tab: "local",
+                action: "click:get-repo#localTabSelected focusin:get-repo#localTabSelected"
+              }
+            ) do |t| %>
+              <% t.text { "Local" } %>
+              <% t.panel do %>
+                <ul class="list-style-none">
+                  <% if pull_request_context %>
                     <%= render partial: "code_menu/pull_request_local_menu_items", locals: {
                       pull_request: pull_request,
                       repository: repository,
@@ -84,109 +82,88 @@
                       default_menu_item_link_classes: default_menu_item_link_classes
                     } %>
                   <% end %>
-                  </ul>
-                <% end %>
-              <% end %>
-              <% component.tab(
-                panel_id: "cloud-panel",
-                id: "cloud-tab",
-                flex: 1,
-                data: {
-                  tab: "cloud",
-                  action: "click:get-repo#cloudTabSelected focusin:get-repo#cloudTabSelected"
-                }
-              ) do |t| %>
-                <% t.text { "Codespaces" } %>
-                <% t.panel(classes: "cloud-panel") do %>
-                  <ul class="list-style-none">
-                    <%#
-                      TODO @github/codespaces: move welcome copy logic into
-                      Codespaces::DropdownListComponent. It should replace the
-                      current Primer::BlankslateComponent that's rendered when the
-                      user has no existing codespaces. See corresponding TODO item in
-                      app/components/codespaces/dropdown_list_component.html.erb.
-                    %>
-                    <% if should_see_welcome_copy %>
-                      <li class="d-flex flex-column welcome-image">
-                        <%= render Primer::BlankslateComponent.new(
-                          title: "Welcome to cloud editing",
-                          title_tag: :h4,
-                          pb: 3
-                        ) do %>
-                          Edit, debug, and run your repository without local cloning and setup.
-                          <%= render(Primer::LinkComponent.new(
-                            href: "#{GitHub.help_url}/codespaces",
-                            underline: :false
-                            )) { "Learn more" } %>
-                        <% end %>
-                        <%# TODO @github/codespaces: Replace temp image. %>
-                        <div class="text-center">
-                          <%= render Primer::Image.new(
-                            src: image_path("modules/site/codespaces/dropdown-logo.png"),
-                            alt: "Codespaces logo",
-                            height: 150,
-                            width: 150
-                          ) %>
-                        </div>
-                      </li>
-                    <% end %>
-
-                    <li class="Box-row p-0 mt-0" <%= test_selector("code-dropdown-codespaces-section") %>>
-                      <%
-                        codespaces_path_params = \
-                          if !pull_request_context
-                            {
-                              event_target: "REPO_PAGE",
-                              repo: repository.id,
-                              current_branch: current_branch_or_tag_name,
-                              codespace: { ref: ref }
-                            }
-                          else
-                            missing_head_ref = \
-                              codespaces_query.repository_policy.can_see_codespaces_for_pull_request? &&
-                                pull_request.closed? &&
-                                  !pull_request.head_ref_exist?
-
-                            {
-                              event_target: "PULL_REQUEST_PAGE_DROPDOWN",
-                              repo: repository.id,
-                              current_branch: pull_request.display_head_ref_name,
-                              codespace: { pull_request_id: pull_request.id },
-                              pr_dropdown: true,
-                              missing_head_ref: missing_head_ref
-                            }
-                          end
-                      %>
-                      <include-fragment
-                        data-target="get-repo.codespaceList"
-                        src="<%= codespaces_path(codespaces_path_params) %>"
-                        data-action="include-fragment-replace:get-repo#hideSpinner">
-                      </include-fragment>
-                    </li>
-                  </ul>
-                <% end %>
+                </ul>
               <% end %>
             <% end %>
-          <% else %>
-            <%# Dropdown menu with no tabs (Local menu items only) %>
-            <ul class="list-style-none">
-              <% if pull_request_context %>
-                <%= render partial: "code_menu/pull_request_local_menu_items", locals: {
-                  pull_request: pull_request,
-                  repository: repository,
-                  default_menu_item_classes: default_menu_item_classes,
-                  default_menu_item_link_classes: default_menu_item_link_classes
-                } %>
-              <% else %>
-                <%= render partial: "code_menu/repo_overview_local_menu_items", locals: {
-                  view: view,
-                  repository: repository,
-                  name_for_codeload: name_for_codeload,
-                  default_menu_item_classes: default_menu_item_classes,
-                  default_menu_item_link_classes: default_menu_item_link_classes
-                } %>
+            <% component.tab(
+              panel_id: "cloud-panel",
+              id: "cloud-tab",
+              flex: 1,
+              data: {
+                tab: "cloud",
+                action: "click:get-repo#cloudTabSelected focusin:get-repo#cloudTabSelected"
+              }
+            ) do |t| %>
+              <% t.text { "Codespaces" } %>
+              <% t.panel(classes: "cloud-panel") do %>
+                <ul class="list-style-none">
+                  <%#
+                    TODO @github/codespaces: move welcome copy logic into
+                    Codespaces::DropdownListComponent. It should replace the
+                    current Primer::BlankslateComponent that's rendered when the
+                    user has no existing codespaces. See corresponding TODO item in
+                    app/components/codespaces/dropdown_list_component.html.erb.
+                  %>
+                  <% if should_see_welcome_copy %>
+                    <li class="d-flex flex-column welcome-image">
+                      <%= render Primer::BlankslateComponent.new(
+                        title: "Welcome to cloud editing",
+                        title_tag: :h4,
+                        pb: 3
+                      ) do %>
+                        Edit, debug, and run your repository without local cloning and setup.
+                        <%= render(Primer::LinkComponent.new(
+                          href: "#{GitHub.help_url}/codespaces",
+                          underline: :false
+                          )) { "Learn more" } %>
+                      <% end %>
+                      <%# TODO @github/codespaces: Replace temp image. %>
+                      <div class="text-center">
+                        <%= render Primer::Image.new(
+                          src: image_path("modules/site/codespaces/dropdown-logo.png"),
+                          alt: "Codespaces logo",
+                          height: 150,
+                          width: 150
+                        ) %>
+                      </div>
+                    </li>
+                  <% end %>
+
+                  <li class="Box-row p-0 mt-0" <%= test_selector("code-dropdown-codespaces-section") %>>
+                    <%
+                      codespaces_path_params = \
+                        if !pull_request_context
+                          {
+                            event_target: "REPO_PAGE",
+                            repo: repository.id,
+                            current_branch: current_branch_or_tag_name,
+                            codespace: { ref: ref }
+                          }
+                        else
+                          missing_head_ref = \
+                            codespaces_query.repository_policy.can_see_codespaces_for_pull_request? &&
+                              pull_request.closed? &&
+                                !pull_request.head_ref_exist?
+
+                          {
+                            event_target: "PULL_REQUEST_PAGE_DROPDOWN",
+                            repo: repository.id,
+                            current_branch: pull_request.display_head_ref_name,
+                            codespace: { pull_request_id: pull_request.id },
+                            pr_dropdown: true,
+                            missing_head_ref: missing_head_ref
+                          }
+                        end
+                    %>
+                    <include-fragment
+                      data-target="get-repo.codespaceList"
+                      src="<%= codespaces_path(codespaces_path_params) %>"
+                      data-action="include-fragment-replace:get-repo#hideSpinner">
+                    </include-fragment>
+                  </li>
+                </ul>
               <% end %>
-            </ul>
+            <% end %>
           <% end %>
         </div>
 
