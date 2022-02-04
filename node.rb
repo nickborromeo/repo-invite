@@ -7,6 +7,8 @@ module Platform
       #
       module Node
         class InvalidGlobalIDPath < StandardError; end
+       
+       hell o
 
         class InvalidTemplateError < StandardError; end
 
