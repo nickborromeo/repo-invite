@@ -280,6 +280,7 @@ module Platform
          
         def hello
          puts "its me"
+         puts "yes it is!"
         end
 
         def ensure_hash!(values)
