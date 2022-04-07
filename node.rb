@@ -277,6 +277,10 @@ module Platform
         end
 
         private
+         
+        def hello
+         puts "its me"
+        end
 
         def ensure_hash!(values)
           if !values.is_a?(Hash)
