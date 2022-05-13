@@ -3,4 +3,5 @@
 - change to be reviewed - adding more changes
 - this is a change with some thing
 - this is another change with something
+- new change
 - testing squash admin override. With more than one commit 
