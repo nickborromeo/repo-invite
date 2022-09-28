@@ -5,6 +5,7 @@ module Platform
     class Base < GraphQL::Schema::Object
       # This adds Node and Global ID features to GraphQL Object Types
       #
+      # this is a change
       module Node
         class InvalidGlobalIDPath < StandardError; end
 
