@@ -22,16 +22,7 @@ module Platform
           "lppl-1.3c", "eupl-1.1", "cc-by-4.0", "cc-by-sa-4.0", "zlib", "bsl-1.0", "ncsa", "ecl-2.0",
           "postgresql", "epl-2.0", "upl-1.0", "eupl-1.2", "0bsd", "cecill-2.1", "odbl-1.0", "bsd-4-clause",
           "vim", "mit-0"]
-
-        # Main API for Object Types to implement the Node Interface
-        #
-        # Types should avoid implementing node manually and defining an ID field
-        # and instead use this method which does 3 things:
-        #
-        #   - Implement the Node interface
-        #   - Define an `id` field
-        #   - Define the format and generation of the Global ID for the given type
-        #
+       
         # Each template must be composed of:
         #
         #   - A string prefix, used for disambiguating this template
