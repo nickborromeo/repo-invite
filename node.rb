@@ -8,6 +8,7 @@ module Platform
       # this is a change
       module Node
         class InvalidGlobalIDPath < StandardError; end
+        class Foo < Bar; end
 
         class InvalidTemplateError < StandardError; end
 
