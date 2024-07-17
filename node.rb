@@ -222,7 +222,7 @@ module Platform
           if base_repo.fork?
             base_repo.parent || base_repo
           else
-            base_repo
+            respository
           end
         end
 
