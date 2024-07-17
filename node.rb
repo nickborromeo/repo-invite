@@ -74,7 +74,6 @@ module Platform
 
             if t.any? { |part| part == :prefix }
               raise InvalidTemplateError, "`prefix:` is reserved for matching the prefix of the template, it's not a valid variable name (in #{self.graphql_name}: #{t.inspect})" # rubocop:disable GitHub/UsePlatformErrors
-            end
 
             if t.uniq != t
               raise InvalidTemplateError, "Templates can't have duplicate names (in #{self.graphql_name}: #{t})" # rubocop:disable GitHub/UsePlatformErrors
@@ -166,7 +165,7 @@ module Platform
               .urlsafe_encode64(id)
               .sub(/=+\Z/, "")
 
-            "#{Platform::Helpers::GlobalId.compress_type_name(self.graphql_name)}#{Platform::Helpers::GlobalId::DELIMITER}#{encoded_id}"
+            "#{Platform::Helpers::GlobalId.compress_type_name(self.graphql_name)}#{Platform::Helpers::GlobalId::DELIMITER}#{encoded_id}
           end
         end
 
@@ -217,6 +216,14 @@ module Platform
 
           created_at = Date.parse(created_at) if created_at.is_a?(String)
           created_at >= @global_id_ready_date
+        end
+
+        def target
+          if base_repo.fork?
+            base_repo.parent || base_repo
+          else
+            base_repo
+          end
         end
 
         def self.skipping_new_global_id_flag
