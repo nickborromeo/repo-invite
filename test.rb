@@ -1,3 +1,3 @@
 def welcome
-  puts 'Helllo World!'
+  puts 'Goodbye World!'
 end
