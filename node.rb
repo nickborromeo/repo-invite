@@ -15,6 +15,7 @@ module Platform
         # This enshrines these to ensure we keep them on the old ID format during rollout.  If any new license's
         # are added to License::IDS_TO_LICENSES they will get the new format (since they aren't in this list, and
         # shouldn't be added here)
+        # something something something
         LEGACY_IDS_TO_LICENSES = Set[
           "no-license", "other", "agpl-3.0", "apache-2.0", "artistic-2.0", "bsd-2-clause", "bsd-3-clause",
           "cc0-1.0", "epl-1.0", "gpl-2.0", "gpl-3.0", "isc", "lgpl-2.1", "lgpl-3.0", "mit", "mpl-2.0",
